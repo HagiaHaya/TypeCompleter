@@ -2,7 +2,7 @@
 // @name				 TypingClub Hack
 // @namespace		https://github.com
 // @version			0.2
-// @description	uefa's typingclub hack
+// @description	HagiaHaya's typing script
 // @author			 You
 // @match				*://*.typingclub.com/sportal/*.play
 // @grant				none
