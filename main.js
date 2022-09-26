@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name				 TypingClub Hack
 // @namespace		https://github.com
-// @version			0.1
-// @description	     HagiaHaya's typing script
-// @author			 HagiaHaya
+// @version			0.2
+// @description	uefa's typingclub hack
+// @author			 You
 // @match				*://*.typingclub.com/sportal/*.play
 // @grant				none
 // ==/UserScript==
@@ -46,12 +46,43 @@ async function autoPlay(finish) {
     }
 }
 
-let pp = autoPlay(true);
+(function() {
+    'use strict';
+    const checkExist = setInterval(function() {
+        const root = document.getElementById("root");
+
+        if (root) {
+            const holder = root.firstElementChild.firstElementChild;
+            setTimeout(() => {
+                if (holder.children.length) {
+                    holder.getElementsByClassName("edmodal-x")[0].click();
+                }
+            }, 250);
+            clearInterval(checkExist);
+        }
+    }, 100);
+})();
+
+let pp = autoPlay(true).then(async () => {
+    console.log("Tried clicking");
+    await sleep(1000);
+    document.getElementsByClassName("navbar-continue")[0].click();
+    console.log("Clicked?");
+});
 setInterval(function() {
     pp;
     if (currentPage != location.href) {
         currentPage = location.href;
-        pp = autoPlay(true).then(e => console.log(e));
+        pp = autoPlay(true).then(async () => {
+            while (true) {
+                try {
+                    document.getElementsByClassName("navbar-continue")[0].click();
+                    break;
+                } catch (e) {
+                    await sleep(1000);
+                }
+            }
+        });
         pp;
     }
 }, 1000);
